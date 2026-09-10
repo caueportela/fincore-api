@@ -1,9 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(python manage.py check)",
-      "Bash(venv/bin/pip install *)",
-      "Bash(venv/bin/python -m pyflakes backend/finance backend/config backend/manage.py)"
-    ]
-  }
-}
