@@ -1,6 +1,6 @@
 # fincore-api
 
-API Backend de um sistema de Gestão Financeira Pessoal/Empresarial, construída em Django + Django REST Framework, com PostgreSQL rodando via Docker.
+Sistema de Gestão Financeira Pessoal/Empresarial em Django puro (views + templates, sem API/DRF), com PostgreSQL rodando via Docker.
 
 ## O que é
 
@@ -12,8 +12,7 @@ Backend financeiro com contas, categorias, transações (receita/despesa/transfe
 
 ## Stack
 
-- Python 3.14 + Django 6.1.1
-- Django REST Framework
+- Python 3.14 + Django 6.1.1 (views + templates, sem DRF)
 - PostgreSQL 16 (container Docker)
 - `psycopg2-binary` (driver do Postgres) + `python-dotenv` (variáveis de ambiente)
 
@@ -38,8 +37,9 @@ fincore-api/
 │       ├── seeds/                       # dados de exemplo (categorias padrão)
 │       ├── management/commands/seed.py  # comando `manage.py seed`
 │       ├── admin.py
+│       ├── views.py                     # views (a construir)
+│       ├── templates/finance/           # templates HTML (a construir)
 │       └── migrations/
-└── frontend/                 # (ainda não iniciado)
 ```
 
 ## Setup do zero
@@ -130,13 +130,18 @@ Acesse `http://127.0.0.1:8000/admin/`.
 | `Budget` (Orçamento) | Teto de gasto por categoria/mês/ano |
 | `RecurringTransaction` (Recorrência) | Template para lançamentos fixos/recorrentes (aluguel, assinatura) |
 
+## Frontend (views + templates)
+
+- HTML simples, possivelmente com Tailwind via CDN (sem build step).
+- Telas construídas majoritariamente via IA (o autor não tem experiência prévia com frontend), com ajustes manuais depois.
+
 ## Status do projeto (checklist)
 
 - [x] Base models (auditoria + soft delete)
 - [x] Modelagem das 5 entidades com `clean()`, `Meta`, índices
 - [x] Migrations aplicadas
 - [x] Seed de categorias padrão
-- [ ] Serializers, ViewSets e rotas (DRF) — pendente
+- [ ] Views e templates (Django puro) — pendente
 - [ ] Cálculo de saldo por conta — pendente
 - [ ] Testes automatizados (soft delete, transferências, saldo) — pendente
 
