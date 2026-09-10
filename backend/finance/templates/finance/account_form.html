@@ -1,0 +1,25 @@
+{% extends "finance/base.html" %}
+
+{% block title %}{% if object %}Editar conta{% else %}Nova conta{% endif %}{% endblock %}
+
+{% block content %}
+<h1 class="text-xl font-semibold mb-4">{% if object %}Editar conta{% else %}Nova conta{% endif %}</h1>
+
+<form method="post" class="bg-white border rounded p-6 space-y-4 max-w-lg">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    {% for field in form %}
+    <div>
+        <label class="block text-sm font-medium mb-1">{{ field.label }}</label>
+        {{ field }}
+        {% if field.errors %}
+        <p class="text-red-600 text-sm mt-1">{{ field.errors|striptags }}</p>
+        {% endif %}
+    </div>
+    {% endfor %}
+    <div class="pt-2">
+        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Salvar</button>
+        <a href="{% url 'finance:account_list' %}" class="ml-3 text-gray-600 hover:underline">Cancelar</a>
+    </div>
+</form>
+{% endblock %}

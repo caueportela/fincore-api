@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Account, Budget, Category, Transaction
+from .models import Account, Budget, Category, RecurringTransaction, Transaction
 
 
 @admin.register(Account)
@@ -38,3 +38,19 @@ class TransactionAdmin(admin.ModelAdmin):
 class BudgetAdmin(admin.ModelAdmin):
     list_display = ("category", "month_reference", "year_reference", "limit_value")
     list_filter = ("year_reference", "month_reference", "category")
+
+
+@admin.register(RecurringTransaction)
+class RecurringTransactionAdmin(admin.ModelAdmin):
+    list_display = (
+        "description",
+        "value",
+        "recurring_type",
+        "frequency",
+        "due_date",
+        "account",
+        "category",
+        "active",
+    )
+    list_filter = ("recurring_type", "frequency", "active")
+    search_fields = ("description",)

@@ -59,11 +59,26 @@ class BaseModel(models.Model):
         self.deleted_at = timezone.now()
         self.save(update_fields=["deleted_at", "updated_at"])
 
+    def delete(self, *args, **kwargs):
+        """Redireciona o delete() padrão do Django para soft delete."""
+        self.soft_delete()
+
+    def hard_delete(self, *args, **kwargs):
+        """Escape hatch: apaga fisicamente o registro."""
+        return super().delete(*args, **kwargs)
+
     def restore(self):
         """Restaura a instância individual."""
         self.deleted_at = None
         self.save(update_fields=["deleted_at", "updated_at"])
-
     @property
     def is_deleted(self):
-        return self.deleted_at is not None
+        return self.deleted_at is not None 
+
+
+
+
+
+
+
+

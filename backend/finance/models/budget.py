@@ -26,7 +26,12 @@ class Budget(BaseModel):
         verbose_name = "Orçamento Mensal"
         verbose_name_plural = "Orçamentos Mensais"
         ordering = ["-year_reference", "-month_reference"]
-        db_table = "finance_budget" 
+        db_table = "finance_budget"
+        indexes = [
+            models.Index(fields=["created_at"], name="budget_created_idx"),
+            models.Index(fields=["updated_at"], name="budget_updated_idx"),
+            models.Index(fields=["deleted_at"], name="budget_deleted_idx"),
+        ]
 
     #Garante que não existam 2 orçamentos ativos para a mesma categoria no mesmo mês/ano
         constraints = [

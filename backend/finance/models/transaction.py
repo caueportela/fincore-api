@@ -61,7 +61,13 @@ class Transaction(BaseModel):
         verbose_name = "Transação"
         verbose_name_plural = "Transações"
         ordering = ["-transaction_date"]
-        db_table = "finance_transaction"
+        db_table = "finance_transaction" 
+        indexes = [
+            models.Index(fields=["created_at"], name="transaction_created_idx"),
+            models.Index(fields=["updated_at"], name="transaction_updated_idx"),
+            models.Index(fields=["deleted_at"], name="transaction_deleted_idx"),
+            models.Index(fields=["transaction_date"], name="transaction_date_idx"),
+        ]
 
     def __str__(self):
         return f"{self.description} - R$ {self.value}"

@@ -31,8 +31,13 @@ class Category(BaseModel):
     class Meta(BaseModel.Meta): 
             verbose_name = "Categoria Financeira" 
             verbose_name_plural = "Categorias Financeiras"
-            ordering =["-created_at"] 
-            db_table = "finance_category" 
+            ordering =["-created_at"]
+            db_table = "finance_category"
+            indexes = [
+                models.Index(fields=["created_at"], name="category_created_idx"),
+                models.Index(fields=["updated_at"], name="category_updated_idx"),
+                models.Index(fields=["deleted_at"], name="category_deleted_idx"),
+            ]
     
 
     def __str__(self):

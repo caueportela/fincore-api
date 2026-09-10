@@ -1,0 +1,41 @@
+{% extends "finance/base.html" %}
+
+{% block title %}Contas{% endblock %}
+
+{% block content %}
+<div class="flex justify-between items-center mb-4">
+    <h1 class="text-xl font-semibold">Contas</h1>
+    <a href="{% url 'finance:account_create' %}" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Nova conta</a>
+</div>
+
+<table class="w-full bg-white border rounded overflow-hidden">
+    <thead>
+        <tr class="text-left border-b bg-gray-50">
+            <th class="p-3">Nome</th>
+            <th class="p-3">Tipo</th>
+            <th class="p-3">Saldo inicial</th>
+            <th class="p-3">Ativa</th>
+            <th class="p-3"></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for account in accounts %}
+        <tr class="border-b">
+            <td class="p-3">
+                <span class="inline-block w-3 h-3 rounded-full mr-2 align-middle" style="background-color: {{ account.color_hex }}"></span>
+                {{ account.name }}
+            </td>
+            <td class="p-3">{{ account.get_account_type_display }}</td>
+            <td class="p-3">R$ {{ account.initial_balance }}</td>
+            <td class="p-3">{% if account.active %}Sim{% else %}Não{% endif %}</td>
+            <td class="p-3 text-right whitespace-nowrap">
+                <a href="{% url 'finance:account_update' account.pk %}" class="text-blue-600 hover:underline">Editar</a>
+                <a href="{% url 'finance:account_delete' account.pk %}" class="text-red-600 hover:underline ml-3">Excluir</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="5" class="p-3 text-gray-500">Nenhuma conta cadastrada.</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -30,8 +30,13 @@ class Account(BaseModel):
     class Meta(BaseModel.Meta):
         verbose_name = "Conta Financeira" 
         verbose_name_plural = "Contas Financeiras"
-        ordering =["-created_at"] 
-        db_table = "finance_account" 
+        ordering =["-created_at"]
+        db_table = "finance_account"
+        indexes = [
+            models.Index(fields=["created_at"], name="account_created_idx"),
+            models.Index(fields=["updated_at"], name="account_updated_idx"),
+            models.Index(fields=["deleted_at"], name="account_deleted_idx"),
+        ]
 
     def __str__(self):
         return self.name
