@@ -1,12 +1,12 @@
 from django.urls import path
 
-from . import views
+from .views import account
 
 app_name = "finance"
 
 urlpatterns = [
-    path("accounts/", views.AccountListView.as_view(), name="account_list"),
-    path("accounts/new/", views.AccountCreateView.as_view(), name="account_create"),
-    path("accounts/<int:pk>/edit/", views.AccountUpdateView.as_view(), name="account_update"),
-    path("accounts/<int:pk>/delete/", views.AccountDeleteView.as_view(), name="account_delete"),
+    path("accounts/", account.account_list, name="account_list"),
+    path("accounts/new/", account.account_create, name="account_create"),
+    path("accounts/<int:pk>/edit/", account.account_upgrade, name="account_update"),
+    path("accounts/<int:pk>/delete/", account.account_delete, name="account_delete"),
 ]
