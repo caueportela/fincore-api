@@ -10,6 +10,8 @@
     <nav class="bg-white border-b px-6 py-4 flex items-center gap-6">
         <a href="{% url 'finance:account_list' %}" class="font-semibold text-lg">FinCore</a>
         <a href="{% url 'finance:account_list' %}" class="text-gray-600 hover:text-gray-900">Contas</a>
+        <a href="{% url 'finance:category_list' %}" class="text-gray-600 hover:text-gray-900">Categorias</a>
+        <a href="{% url 'finance:budget_list' %}" class="text-gray-600 hover:text-gray-900">Orçamentos</a>
     </nav>
     <main class="max-w-4xl mx-auto p-6">
         {% block content %}{% endblock %}

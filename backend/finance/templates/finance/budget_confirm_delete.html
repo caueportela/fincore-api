@@ -1,0 +1,13 @@
+{% extends "finance/base.html" %}
+
+{% block title %}Excluir orçamento{% endblock %}
+
+{% block content %}
+<h1 class="text-xl font-semibold mb-4">Excluir orçamento</h1>
+<p class="mb-4">Tem certeza que deseja excluir o orçamento de <strong>{{ object.category.name }}</strong> ({{ object.month_reference }}/{{ object.year_reference }})? (soft delete — pode ser restaurado depois pelo admin)</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700">Confirmar exclusão</button>
+    <a href="{% url 'finance:budget_list' %}" class="ml-3 text-gray-600 hover:underline">Cancelar</a>
+</form>
+{% endblock %}
